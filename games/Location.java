@@ -17,16 +17,12 @@ class Location
     	super();
     	row = r;
     	col = c;
-    	game = g;
+        game = g;
     	addActionListener(this);
     }
-    public int getRow() {
-	   return row;
-    }
-    public int getCol() {
-	   return col;
-    }
+    
     public void actionPerformed(java.awt.event.ActionEvent e) { 
 	   game.userMove(row, col);
     } 
+
 }

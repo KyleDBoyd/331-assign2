@@ -1,55 +1,47 @@
 package games;
+// Purpose: Draws a grid of buttons that can be used to implement a grid game.
+class BabyGame {
 
-class BabyGame
-    extends javax.swing.JPanel
-/* Purpose: Draws a grid of buttons that can be used to implement a grid game.
-*/
-{
-    public static final int HEIGHT=9;	// default height and width of the play area
-    public static final int WIDTH=9;
+	// Constants
+	private static final String MINE_CHARACTER = "K";
+	private static final String STAR_GATE_CHARACTER = "*";
+	private static final String SHIP_CHARACTER = "E";
+	private static final int ENERGY_CHANGE = 10;
+	private static final int MINE_COUNT = 3;
 
-    private int height;
-    private int width;
+	private GameGrid grid;
+	private Ship ship;
+	private StarGate gate;
+	private Mine mines[];
 
-    Location[][] grid;
+	public void initialize() {
+		ship = new Ship(grid, SHIP_CHARACTER);
+		gate = new StarGate(grid, STAR_GATE_CHARACTER);
+	}
 
-    BabyGame() {
-		super();
-
-		height = HEIGHT+1;		// an extra header row and column
-		width = WIDTH+1;
-		setLayout(new java.awt.GridLayout(height,width));
-
-		// Generate the grid
-		grid = new Location[height][width];
-		grid[0][0] = new Location(0, 0, this);
-		for (int i = height-1; i >= 0; i--) {
-		    for (int j = 0; j < width; j++) {
-				grid[i][j] = new Location(i, j, this);
-		    }
-		}
-		grid[0][0].setEnabled(false);
-		for (int i = 1; i < height; i++) {
-		    grid[i][0].setText("" + i);
-		    grid[i][0].setEnabled(false);
-		}
-		for (int j = 1; j < width; j++) {
-		    grid[0][j].setText("" + j);
-		    grid[0][j].setEnabled(false);
-		}
-
-		// Render the grid in the panel - vertical order is
-		//   reversed so the matrix appears in a
-		//   "natural" way with origin at lower left
-		for (int i = height-1; i >= 0; i--) {
-		    for (int j = 0; j < width; j++) {
-				add(grid[i][j]);
-		    }
-		}
+    public void setGrid(GameGrid g) {
+    	grid = g;
     }
 
-    void userMove(int row, int col) {
-		System.out.println("You clicked on ("+row+","+col+")");
+    public void userMove(int row, int col) {
+
+		// Staying in current position
+		if(row == ship.getRow() && col == ship.getCol()) {
+			ship.increaseEnergyLevel(ENERGY_CHANGE);
+		// Ship attempted move
+		} else {
+			ship.decreaseEnergyLevel(ENERGY_CHANGE);
+			mines = new Mine[MINE_COUNT];
+			for(int i = 0; i < MINE_COUNT; i++) {
+				mines[i] = new Mine(grid, MINE_CHARACTER);
+			}
+
+			// Erase current ship and redraw in the new location
+			ship.erase();
+			ship.setRow(row);
+			ship.setCol(col);
+			ship.draw();
+		}
     }
 
 }
