@@ -7,12 +7,14 @@ class BabyGame {
 	private static final String STAR_GATE_CHARACTER = "*";
 	private static final String SHIP_CHARACTER = "E";
 	private static final int ENERGY_CHANGE = 10;
+	private static final int MINE_ENERGY_CHANGE = 30;
 	private static final int MINE_COUNT = 3;
 
 	private GameGrid grid;
 	private Ship ship;
 	private StarGate gate;
 	private Mine mines[];
+	private moveCount = 0;
 
 	public void initialize() {
 		ship = new Ship(grid, SHIP_CHARACTER);
@@ -30,6 +32,10 @@ class BabyGame {
 			ship.increaseEnergyLevel(ENERGY_CHANGE);
 		// Ship attempted move
 		} else {
+			moveCount++;
+			if(moveCount > 100) {
+				// Game Over!
+			}
 			ship.decreaseEnergyLevel(ENERGY_CHANGE);
 			mines = new Mine[MINE_COUNT];
 			for(int i = 0; i < MINE_COUNT; i++) {
@@ -41,7 +47,16 @@ class BabyGame {
 			ship.setRow(row);
 			ship.setCol(col);
 			ship.draw();
-		}
+
+			// Ship lands on mine
+			for(int i = 0; i < mines.length(); i++) {
+				if(mines[i].getRow() == row && mines[i].getCol == col) {
+					ship.decreaseEnergyLevel(MINE_ENERGY_CHANGE);
+					ship.setRow(INITIAL_SHIP_ROW);
+					ship.setCol(INITIAL_SHIP_COL);
+				}
+			}
+
     }
 
 }
