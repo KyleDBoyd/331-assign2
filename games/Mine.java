@@ -1,7 +1,14 @@
 package games;
 
+// OVERVIEW:
+// Implements a K-mine on the grid
+// See Sprite for additional details
+//
+//
+
 class Mine extends Sprite {
 	
+	// Constants
 	private static final int INITIAL_MINE_ROW = 1; // Placeholder
 	private static final int INITIAL_MINE_COL = 1; // Placeholder
 

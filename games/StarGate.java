@@ -1,7 +1,14 @@
 package games;
 
+// OVERVIEW:
+//
+//
+//
+//
+
 class StarGate extends Sprite {
-	
+
+	// Constants	
 	private static final int INITIAL_GATE_ROW = 9;
 	private static final int INITIAL_GATE_COL = 9;
 

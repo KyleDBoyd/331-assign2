@@ -1,7 +1,10 @@
 package games;
 
+// OVERVIEW:
+// Implements a top level window to contain the BabyQ game
+//
+
 class BabyQ extends javax.swing.JFrame
-// Purpose: Implements a top level window to contain the BabyQ game.
 {
     // REQUIRES: \
     // MODIFIES: JFrame and JFrame contents

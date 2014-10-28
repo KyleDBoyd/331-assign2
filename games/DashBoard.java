@@ -1,7 +1,14 @@
 package games;
 
+// OVERVIEW:
+// Implements a panel within the top level frame that 
+// contains the dashboard labels
+//
+//
+
 class DashBoard extends javax.swing.JPanel {
 	
+	// Instance Variables/Objects
 	private BabyGame babyGame;
 	private Ship ship;
 	private javax.swing.JLabel energyLevel, moves, notice;

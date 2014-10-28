@@ -1,14 +1,21 @@
 package games;
 
+// OVERVIEW:
+// Draws a grid of buttons that can be used to implement a grid game.
+//
+//
+//
+
 class GameGrid extends javax.swing.JPanel {
 
+	// Constants
     public static final int HEIGHT = 9;	// default height and width of the play area
     public static final int WIDTH = 9;
     public static final int START_POINT = 1;
 
+	// Instance Variables/Objects
     private int height;
     private int width;
-
     Location[][] grid;
     BabyGame game;
     DashBoard dashboard;
@@ -23,7 +30,8 @@ class GameGrid extends javax.swing.JPanel {
 		babyQ = bq;
 		game = new BabyGame(babyQ);
 
-		height = HEIGHT+1;		// an extra header row and column
+		// an extra header row and column
+		height = HEIGHT+1;		
 		width = WIDTH+1;
 		setLayout(new java.awt.GridLayout(height,width));
 

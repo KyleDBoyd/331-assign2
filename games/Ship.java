@@ -1,5 +1,9 @@
 package games;
 
+// OVERVIEW:
+// Implements a ship
+//
+
 class Ship extends Sprite {
 
 	// Constants
@@ -7,7 +11,7 @@ class Ship extends Sprite {
 	private static final int INITIAL_SHIP_ROW = 1;
 	private static final int INITIAL_SHIP_COL = 1;
 
-	// Variables
+	// Instance Variables/Objects
 	private double energyLevel;
 	private java.awt.Point prevPosition;
 

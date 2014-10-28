@@ -1,5 +1,9 @@
 package games;
-// Purpose: Draws a grid of buttons that can be used to implement a grid game.
+
+// OVERVIEW:
+// Handles the game logic of the BabyQ Game and user interaction
+//
+
 class BabyGame {
 
 	// Constants
@@ -16,6 +20,7 @@ class BabyGame {
 	private static final String MINE_HIT = "K-mine hit! Energy level decreased by " +
 										   " 30% and returned to the starting position";
 
+	// Instance Variables/Objects
 	private GameGrid grid;
 	private Ship ship;
 	private StarGate gate;
@@ -33,8 +38,8 @@ class BabyGame {
 
 	// REQUIRES: Ship, StarGate, and Dashboard classes are avaliable.
 	// 			 Assumes the babyQ object extends JFrame
-    // MODIFIES: 
-    // EFFECTS:
+    // MODIFIES: grid, ship, gate, mines, moveCount, dashboard 
+    // EFFECTS: Initializes the instance variables defined above and loads the dashboard
 	public void initialize(GameGrid g) {
 		grid = g;
 		ship = new Ship(grid, SHIP_CHARACTER);
@@ -104,9 +109,9 @@ class BabyGame {
 		dashboard.setMoveLabel(moveCount);		
     }
 
-	// REQUIRES: 
-    // MODIFIES:
-    // EFFECTS:	
+	// REQUIRES: grid and dashboard are set
+    // MODIFIES: grid, dashboard
+    // EFFECTS:	Disables all cells on the grid 
     private void gameOver(String s) {
     	// Disable all cells
     	grid.disableAllCells();
@@ -115,9 +120,10 @@ class BabyGame {
 
     }
 
-	// REQUIRES: 
-    // MODIFIES:
-    // EFFECTS:	
+	// REQUIRES: p and n x,y coordinates are set
+    // MODIFIES: / 
+    // EFFECTS:	Uses the pythagorean theorem to calculate the energy used from 2 points
+    //			c^2 = a^2 + b^2
     private double calculateEnergyUsed(java.awt.Point p, java.awt.Point n) {
     	return Math.sqrt((Math.pow((n.x - p.x), 2) + Math.pow((n.y - p.y), 2))) * 100;
     }

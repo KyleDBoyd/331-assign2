@@ -1,7 +1,14 @@
 package games;
 
+// OVERVIEW:
+//
+//
+//
+//
+
 class Sprite {
 
+    // Instance Variables/Objects
     protected GameGrid grid;
     protected String sprite;
     protected java.awt.Point location;
