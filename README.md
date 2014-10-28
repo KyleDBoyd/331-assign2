@@ -46,6 +46,8 @@ After several moves
 |1|-|-|-|-|-|-|-|-|-|
 | |1|2|3|4|5|6|7|8|9| 
 
+This game is taken from: [Dwyer 80] Dwyer, Thomas and Margot Critchfield. TRS-80 Programming in Style, Radio Shack, 1980.
+
 File List
 ==============
 * makefile
@@ -60,5 +62,6 @@ File List
     * Mine.java
     * Sprite.java
 
-
+Test Cases
+==============
 
