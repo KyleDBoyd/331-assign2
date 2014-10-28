@@ -71,7 +71,7 @@ class BabyGame {
 			}
 
 			// Set ships previous location before redrawing
-			//ship.setPrevPosition(ship.getRow(), ship.getCol());
+			ship.setPrevPosition(ship.getRow(), ship.getCol());
 
 			// Erase current ship and redraw in the new location
 			ship.reDraw(row, col);
@@ -80,7 +80,7 @@ class BabyGame {
 			ship.decreaseEnergyLevelPercentage(ENERGY_CHANGE);
 
 			// Calculate energy used to move and decrement accordingly
-			//ship.decreaseEnergyLevel(calculateEnergyUsed(ship.getPrevPosition(), ship.getPosition()));
+			ship.decreaseEnergyLevel(calculateEnergyUsed(ship.getPrevPosition(), ship.getPosition()));
 
 			// Ship lands on mine
 			for(int i = 0; i < mines.size(); i++) {
@@ -119,7 +119,7 @@ class BabyGame {
     // MODIFIES:
     // EFFECTS:	
     private double calculateEnergyUsed(java.awt.Point p, java.awt.Point n) {
-    	return Math.sqrt(Math.pow((n.x - p.x), 2) + Math.pow((n.y - p.y), 2)) * 100;
+    	return Math.sqrt((Math.pow((n.x - p.x), 2) + Math.pow((n.y - p.y), 2))) * 100;
     }
 
 }

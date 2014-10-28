@@ -13,10 +13,12 @@ class Ship extends Sprite {
 
     // REQUIRES: GameGrid is set.
     // MODIFIES: energyLevel. See Sprite constructor for additional modifications
-    // EFFECTS: Sets the energy level. See Sprite constructor for additional effects
+    // EFFECTS: Sets the energy level. Initialize prevPosition.
+    //			See Sprite constructor for additional effects
 	Ship(GameGrid g, String s) {
 		super(INITIAL_SHIP_ROW, INITIAL_SHIP_COL, s, g);
 		setEnergyLevel(INITIAL_ENERGY_LEVEL);
+		prevPosition = new java.awt.Point(INITIAL_SHIP_ROW, INITIAL_SHIP_COL);
 	}
 
     // REQUIRES: /
