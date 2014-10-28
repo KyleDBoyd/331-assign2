@@ -11,11 +11,17 @@ class GameGrid extends javax.swing.JPanel {
 
     Location[][] grid;
     BabyGame game;
+    DashBoard dashboard;
+    BabyQ babyQ;
 
-    GameGrid() {
+	// REQUIRES: 
+    // MODIFIES:
+    // EFFECTS:
+    GameGrid(BabyQ bq) {
 		super();
 
-		game = new BabyGame();
+		babyQ = bq;
+		game = new BabyGame(babyQ);
 
 		height = HEIGHT+1;		// an extra header row and column
 		width = WIDTH+1;
@@ -47,8 +53,17 @@ class GameGrid extends javax.swing.JPanel {
 		}
 
 		// Pass the Grid to the game and initialize the game
-		game.setGrid(this);
-		game.initialize();
+		game.initialize(this);
+    }
 
+	// REQUIRES: grid is set
+    // MODIFIES: grid
+    // EFFECTS: Disables all cells in the grid. The user can no longer click on the cells.
+    public void disableAllCells() {
+    	for(int i = 0; i < height; i++) {
+    		for (int j = 0; j < width; j++) {
+    			grid[i][j].setEnabled(false);
+    		}
+    	}
     }
 }

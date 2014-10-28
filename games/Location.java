@@ -13,6 +13,9 @@ class Location
     private final int col;
     private final BabyGame game;
 
+    // REQUIRES: 
+    // MODIFIES:
+    // EFFECTS:
     Location(int r, int c, BabyGame g) {
     	super();
     	row = r;
@@ -21,6 +24,9 @@ class Location
     	addActionListener(this);
     }
     
+    // REQUIRES: 
+    // MODIFIES:
+    // EFFECTS:
     public void actionPerformed(java.awt.event.ActionEvent e) { 
 	   game.userMove(row, col);
     } 

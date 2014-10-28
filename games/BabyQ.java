@@ -3,22 +3,32 @@ package games;
 class BabyQ extends javax.swing.JFrame
 // Purpose: Implements a top level window to contain the BabyQ game.
 {
+    // REQUIRES: \
+    // MODIFIES: JFrame and JFrame contents
+    // EFFECTS: Initializes the game and game grid
     BabyQ() {
 		initUI();
     }
 
+    // REQUIRES: \
+    // MODIFIES: Jframe and Jframe contents
+    // EFFECTS: Set's the game title and Jframe configurations. Initializes the game and gamegrid
     private void initUI() {
         
         setTitle("Baby Q");
         setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
 
-        add(new GameGrid());
+        setLayout(new java.awt.GridLayout(1,2));
 
-	    setSize(500,500);
+        add(new GameGrid(this));
+
+	    setSize(1200,1200);
         setLocationRelativeTo(null);
     }
 
-
+    // REQUIRES: 
+    // MODIFIES:
+    // EFFECTS:
     public static void main(String[] args) {
     	javax.swing.SwingUtilities.invokeLater(new Runnable() {
     		@Override
