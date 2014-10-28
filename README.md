@@ -62,6 +62,22 @@ File List
     * Mine.java
     * Sprite.java
 
+Example Execution
+==============
+Run the following to compile the program:
+
+`make`
+
+Once the program is compiled run:
+
+`make run`
+
+Run the following to remove the compiled files:
+
+`make clean`
+
+    
+
 Test Cases
 ==============
 
