@@ -17,7 +17,7 @@ Move to another sector, with a corresponding decrease in the energy level
 
 K-mines
 
-After the player moves, the computer lays a K-mine at random in the galaxy. If the K-mine lands on the E ship, the K-mine self destructs, E's energy level is decreased by 30% and E is returned to the start position.
+After the player moves, the computer lays 3 K-mines at random in the galaxy. If the K-mine lands on the E ship, the K-mine self destructs, E's energy level is decreased by 30% and E is returned to the start position.
 
 If the K-mine lands on one of the stars protecting the star gate, it is destroyed without further effect. Similarly, if it lands on the star gate, it is whisked to another galaxy and rendered harmless in the process.
 
@@ -71,7 +71,7 @@ Class Design
 * GameGrid - Builds the game grid
 * Location - Implements a button that knows its location in a grid of buttons
 * BabyGame - Handles all of the game logic and click events
-* Sprite - Sprites 
+* Sprite - Sprites that are drawn on the grid
     * Mine
     * Ship
     * StarGate
@@ -80,17 +80,38 @@ Example Execution
 ==============
 Run the following to compile the program:
 
-`make`
+`$make`
 
 Once the program is compiled run:
 
-`make run`
+`$make run`
 
 Run the following to remove the compiled files:
 
-`make clean`
+`$make clean`
 
 
 Test Cases
 ==============
+Move around the grid => Energy descrease and K-mines spawn
+Move on the first move (Insufficient Energy) => Game over.
+Stay in place => Energy increased by 10%. 
+Move and have insufficient energy => Game over.
+Move onto a K-mine => Lose 30% health and sent to start. Potential game over.
+K-mine spawns on ship => Lose 30% health and sent to start. Potential game over.
+Exceed move limit => Game over.
+Reach end with sufficient energy => Win!
+Reach end with insufficient energy => Game over.
+Reach end, but exceed move limit => Game over.
+Move on top of star => Not allowed. Move denied.
+Move away from gate => Energy correctly decreases
+
+I started implementing class specific unit tests with JUnit, but I didn't finish them due to time constraints. I plan to integrate this into assigment #3 when we extend this game.
+
+Additional Notes
+==============
+See https://github.com/KyleDBoyd/331-assign2/ for a nicely formatted readme with Markdown.
+
+
+
 
