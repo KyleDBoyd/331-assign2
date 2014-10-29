@@ -27,9 +27,9 @@ class BabyQ extends javax.swing.JFrame
         setLocationRelativeTo(null);
     }
 
-    // REQUIRES: 
-    // MODIFIES:
-    // EFFECTS:
+    // REQUIRES: \
+    // MODIFIES: bq
+    // EFFECTS: Initializes BabyQ and displays the game board
     public static void main(String[] args) {
     	javax.swing.SwingUtilities.invokeLater(new Runnable() {
     		@Override
