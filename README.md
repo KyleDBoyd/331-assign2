@@ -11,8 +11,9 @@ If the energy level falls below 20 units, life support fails and the player lose
 
 On a given turn, the player can:
 
-    stay in place, increasing the energy level by 10%
-    move to another sector, with a corresponding decrease in the energy level
+Stay in place, increasing the energy level by 10%
+
+Move to another sector, with a corresponding decrease in the energy level
 
 K-mines
 
@@ -66,7 +67,14 @@ File List
 
 Class Design
 ==============
-BabyQ - Main 
+* BabyQ - Implements a top level window and initializes the game (Main)
+* GameGrid - Builds the game grid
+* Location - Implements a button that knows its location in a grid of buttons
+* BabyGame - Handles all of the game logic and click events
+* Sprite - Sprites 
+    * Mine
+    * Ship
+    * StarGate
 
 Example Execution
 ==============
