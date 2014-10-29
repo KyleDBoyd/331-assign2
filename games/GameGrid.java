@@ -3,8 +3,6 @@ package games;
 // OVERVIEW:
 // Draws a grid of buttons that can be used to implement a grid game.
 //
-//
-//
 
 class GameGrid extends javax.swing.JPanel {
 
@@ -16,14 +14,13 @@ class GameGrid extends javax.swing.JPanel {
 	// Instance Variables/Objects
     private int height;
     private int width;
-    Location[][] grid;
-    BabyGame game;
-    DashBoard dashboard;
-    BabyQ babyQ;
+    protected Location[][] grid;
+    private BabyGame game;
+    private BabyQ babyQ;
 
-	// REQUIRES: 
-    // MODIFIES:
-    // EFFECTS:
+	// REQUIRES: babyQ is set
+    // MODIFIES: game, grid
+    // EFFECTS: Initializes the grid and creates the game
     GameGrid(BabyQ bq) {
 		super();
 

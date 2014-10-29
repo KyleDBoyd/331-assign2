@@ -1,8 +1,8 @@
 package games;
 
 // OVERVIEW:
-// Implements a ship
-//
+// Implements a ship sprite. This class manages the ship's attributes.
+// See Sprite class for additional details.
 
 class Ship extends Sprite {
 

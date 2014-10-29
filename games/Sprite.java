@@ -1,9 +1,9 @@
 package games;
 
 // OVERVIEW:
-//
-//
-//
+// Implements a sprite on the grid.
+// This class has the ability to draw, erase, and redraw sprites
+// It also keeps track of the sprite position on the grid
 //
 
 class Sprite {

@@ -8,6 +8,9 @@ package games;
 
 class DashBoard extends javax.swing.JPanel {
 	
+	// Constants
+
+
 	// Instance Variables/Objects
 	private BabyGame babyGame;
 	private Ship ship;
@@ -20,13 +23,15 @@ class DashBoard extends javax.swing.JPanel {
 		super();
 		babyGame = g;
 		ship = s;
-		energyLevel = new javax.swing.JLabel("", javax.swing.JLabel.CENTER);
-	    moves = new javax.swing.JLabel("", javax.swing.JLabel.CENTER);
-	    notice = new javax.swing.JLabel("", javax.swing.JLabel.CENTER);
+		this.setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
+		energyLevel = new javax.swing.JLabel("");
+	    moves = new javax.swing.JLabel("");
+	    notice = new javax.swing.JLabel("");
 	    setEnergyLabel(ship.getEnergyLevel());
 	    setMoveLabel(babyGame.getMoveCount());
 	    add(energyLevel);
 	    add(moves);
+	    add(notice);
 	}
 
 	// REQUIRES: /

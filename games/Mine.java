@@ -1,7 +1,7 @@
 package games;
 
 // OVERVIEW:
-// Implements a K-mine on the grid
+// Implements a K-mine on the grid. Mines cannot be drawn on the stargate.
 // See Sprite for additional details
 //
 //
@@ -22,9 +22,14 @@ class Mine extends Sprite {
 	// REQUIRES: /
 	// MODIFIES: Updates the mine position
 	// EFFECTS: Gets a random board position and draws the mine on the board.
+	//			Makes sure the mine doesn't land in the star gate or on one of the stars
+	//			protecting the gate
 	public void draw() {
-		int randRow = getMinePosition(grid.START_POINT, grid.HEIGHT);
-		int randCol = getMinePosition(grid.START_POINT, grid.WIDTH);
+		int randRow, randCol;
+		do {
+			randRow = getMinePosition(grid.START_POINT, grid.HEIGHT - 1);
+			randCol = getMinePosition(grid.START_POINT, grid.WIDTH - 1);
+		} while(randRow == grid.HEIGHT - 1 && randCol == grid.WIDTH - 1);
 		setPosition(randRow, randCol);
 		super.draw();
 	}

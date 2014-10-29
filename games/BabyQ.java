@@ -1,7 +1,7 @@
 package games;
 
 // OVERVIEW:
-// Implements a top level window to contain the BabyQ game
+// Implements a top level window to contain the BabyQ game.
 //
 
 class BabyQ extends javax.swing.JFrame
@@ -21,11 +21,9 @@ class BabyQ extends javax.swing.JFrame
         setTitle("Baby Q");
         setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
 
-        setLayout(new java.awt.GridLayout(1,2));
-
         add(new GameGrid(this));
 
-	    setSize(1200,1200);
+	    setSize(800,800);
         setLocationRelativeTo(null);
     }
 
