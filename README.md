@@ -94,17 +94,29 @@ Run the following to remove the compiled files:
 Test Cases
 ==============
 Move around the grid => Energy descrease and K-mines spawn
+
 Move on the first move (Insufficient Energy) => Game over.
+
 Stay in place => Energy increased by 10%. 
+
 Move and have insufficient energy => Game over.
+
 Move onto a K-mine => Lose 30% health and sent to start. Potential game over.
+
 K-mine spawns on ship => Lose 30% health and sent to start. Potential game over.
+
 Exceed move limit => Game over.
+
 Reach end with sufficient energy => Win!
+
 Reach end with insufficient energy => Game over.
+
 Reach end, but exceed move limit => Game over.
+
 Move on top of star => Not allowed. Move denied.
+
 Move away from gate => Energy correctly decreases
+
 
 I started implementing class specific unit tests with JUnit, but I didn't finish them due to time constraints. I plan to integrate this into assigment #3 when we extend this game.
 
