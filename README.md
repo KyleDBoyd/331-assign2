@@ -20,33 +20,33 @@ After the player moves, the computer lays a K-mine at random in the galaxy. If t
 
 If the K-mine lands on one of the stars protecting the star gate, it is destroyed without further effect. Similarly, if it lands on the star gate, it is whisked to another galaxy and rendered harmless in the process.
 
-Initial state
-|   |   |   |   |   |   |   |   |   |   |   |   |
-|---|---|---|---|---|:-:|---|---|---|---|---|---|
-|   |   |   |   |   |   |   |   |   |   |   |   |
-|   |   |   |   |   |   |   |   |   |   |   |   |
-|   |   |   |   |   |   |   |   |   |   |   |   |
-|   |   |   |   |   |   |   |   |   |   |   |   |
-|   |   |   |   |   |   |   |   |   |   |   |   |
-|   |   |   |   |   |   |   |   |   |   |   |   |
-|   |   |   |   |   |   |   |   |   |   |   |   |
-|   |   |   |   |   |   |   |   |   |   |   |   |
-|   |   |   |   |   |   |   |   |   |   |   |   |
-|   |   |   |   |   |   |   |   |   |   |   |   |
+Initial State
 
+| 9 | - | - | - | - | - | - | - | * |   |
+|---|---|---|---|---|---|---|---|---|---|
+| 8 | - | - | - | - | - | - | - | * | * |
+| 7 | - | - | - | - | - | - | - | - | - |
+| 6 | - | - | - | - | - | - | - | - | - |
+| 5 | - | - | - | - | - | - | - | - | - |
+| 4 | - | - | - | - | - | - | - | - | - |
+| 3 | - | - | - | - | - | - | - | - | - |
+| 2 | - | - | - | - | - | - | - | - | - |
+| 1 | E | - | - | - | - | - | - | - | - |
+|   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
 
-After several moves
+After Several Moves
 
-|9|-|-|-|-|-|K|-|*|-|  
-|8|-|-|-|-|-|-|-|*|*|
-|7|-|-|-|-|-|-|-|-|-|
-|6|-|-|-|-|-|-|-|-|-|
-|5|-|-|-|-|-|-|-|-|-|
-|4|-|-|E|-|-|-|-|K|-| 
-|3|-|-|-|-|-|K|-|-|-|  
-|2|-|-|-|-|-|-|-|-|-|
-|1|-|-|-|-|-|-|-|-|-|
-| |1|2|3|4|5|6|7|8|9| 
+| 9 | - | - | - | - | - | K | - | * |   |
+|---|---|---|---|---|---|---|---|---|---|
+| 8 | - | - | - | - | - | - | - | * | * |
+| 7 | - | - | - | - | - | - | - | - | - |
+| 6 | - | - | - | - | - | - | - | - | - |
+| 5 | - | - | - | - | - | - | - | - | - |
+| 4 | - | - | E | - | - | - | - | K | - |
+| 3 | - | - | - | - | - | K | - | - | - |
+| 2 | - | - | - | - | - | - | - | - | - |
+| 1 | - | - | - | - | - | - | - | - | - |
+|   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
 
 This game is taken from: [Dwyer 80] Dwyer, Thomas and Margot Critchfield. TRS-80 Programming in Style, Radio Shack, 1980.
 
@@ -64,6 +64,10 @@ File List
     * Mine.java
     * Sprite.java
 
+Class Design
+==============
+BabyQ - Main 
+
 Example Execution
 ==============
 Run the following to compile the program:
@@ -78,7 +82,6 @@ Run the following to remove the compiled files:
 
 `make clean`
 
-    
 
 Test Cases
 ==============
