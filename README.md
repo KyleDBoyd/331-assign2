@@ -21,17 +21,19 @@ After the player moves, the computer lays a K-mine at random in the galaxy. If t
 If the K-mine lands on one of the stars protecting the star gate, it is destroyed without further effect. Similarly, if it lands on the star gate, it is whisked to another galaxy and rendered harmless in the process.
 
 Initial state
+|   |   |   |   |   |   |   |   |   |   |   |   |
+|---|---|---|---|---|:-:|---|---|---|---|---|---|
+|   |   |   |   |   |   |   |   |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |   |   |
+|   |   |   |   |   |   |   |   |   |   |   |   |
 
-|9|-|-|-|-|-|-|-|*|-|  
-|8|-|-|-|-|-|-|-|*|*|
-|7|-|-|-|-|-|-|-|-|-|
-|6|-|-|-|-|-|-|-|-|-|
-|5|-|-|-|-|-|-|-|-|-|
-|4|-|-|-|-|-|-|-|-|-| 
-|3|-|-|-|-|-|-|-|-|-|  
-|2|-|-|-|-|-|-|-|-|-|
-|1|E|-|-|-|-|-|-|-|-|
-| |1|2|3|4|5|6|7|8|9| 
 
 After several moves
 
