@@ -75,6 +75,17 @@ class Sprite {
         location.setLocation(r, c);
     }
 
+    // REQUIRES: /
+    // MODIFIES: / 
+    // EFFECTS: /
+    public void setSprite(String s) {
+        sprite = s;
+    }
+
+    public String getSprite() {
+        return sprite;
+    }
+
 }
 
 
