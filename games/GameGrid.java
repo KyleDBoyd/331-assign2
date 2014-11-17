@@ -7,8 +7,8 @@ package games;
 class GameGrid extends javax.swing.JPanel {
 
 	// Constants
-    public static final int HEIGHT = 9;	// default height and width of the play area
-    public static final int WIDTH = 9;
+    public static final int HEIGHT = 11;	// default height and width of the play area
+    public static final int WIDTH = 15;
     public static final int START_POINT = 1;
 
 	// Instance Variables/Objects
@@ -44,7 +44,10 @@ class GameGrid extends javax.swing.JPanel {
 		for (int i = 1; i < height; i++) {
 		    grid[i][0].setText("" + i);
 		    grid[i][0].setEnabled(false);
-		  	grid[0][i].setText("" + i);
+		}
+
+		for (int i = 1; i < width; i++) {
+			grid[0][i].setText("" + i);
 		    grid[0][i].setEnabled(false);
 		}
 
@@ -68,6 +71,18 @@ class GameGrid extends javax.swing.JPanel {
     	for(int i = 0; i < height; i++) {
     		for (int j = 0; j < width; j++) {
     			grid[i][j].setEnabled(false);
+    		}
+    	}
+    }
+
+    // REQUIRES: grid is set
+    // MODIFIES: grid
+    // EFFECTS: Clears the grid and ensures the cells are enabled
+   	public void clearGrid() {
+    	for(int i = 1; i < height; i++) {
+    		for (int j = 1; j < width; j++) {
+    			grid[i][j].setText("");
+    			grid[i][j].setEnabled(true);
     		}
     	}
     }
