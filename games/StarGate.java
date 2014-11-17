@@ -8,8 +8,8 @@ package games;
 class StarGate extends Sprite {
 
 	// Constants	
-	private static final int INITIAL_GATE_ROW = 9;
-	private static final int INITIAL_GATE_COL = 9;
+	private static final int INITIAL_GATE_ROW = 11;
+	private static final int INITIAL_GATE_COL = 15;
 
     // REQUIRES: GameGrid is set.
     // MODIFIES: See Sprite constructor 
