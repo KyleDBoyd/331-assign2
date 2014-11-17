@@ -7,9 +7,10 @@ package games;
 class Ship extends Sprite {
 
 	// Constants
-	private static final double INITIAL_ENERGY_LEVEL = 100;
+	private static final double INITIAL_ENERGY_LEVEL = 115;
 	private static final int INITIAL_SHIP_ROW = 1;
 	private static final int INITIAL_SHIP_COL = 1;
+	private static final double ENERGY_DISTANCE_MULTIPLIER = 105; 
 
 	// Instance Variables/Objects
 	private double energyLevel;
@@ -87,5 +88,13 @@ class Ship extends Sprite {
 	public java.awt.Point getPrevPosition() {
 		return prevPosition;
 	}
+
+	// REQUIRES: p and n x,y coordinates are set
+    // MODIFIES: / 
+    // EFFECTS:	Uses the pythagorean theorem to calculate the distance from 2 points
+    //			c^2 = a^2 + b^2. It then multiplies the distance by 100 to get the energy used.
+    public double calculateEnergyUsed(java.awt.Point p, java.awt.Point n) {
+    	return Math.sqrt((n.x - p.x) * (n.x - p.x) + (n.y - p.y) * (n.y - p.y)) * ENERGY_DISTANCE_MULTIPLIER;
+    }
  
 }
