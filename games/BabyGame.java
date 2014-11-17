@@ -7,18 +7,22 @@ package games;
 class BabyGame {
 
 	// Constants
-	private static final String MINE_CHARACTER = "K";
+	private static final String K_MINE_CHARACTER = "K";
+	private static final String L_MINE_CHARACTER = "L";
 	private static final String STAR_GATE_CHARACTER = "*";
 	private static final String SHIP_CHARACTER = "E";
-	private static final int ENERGY_CHANGE = 10;
-	private static final int MINE_ENERGY_CHANGE = 30;
+	private static final int ENERGY_CHANGE = 9;
+	private static final int MINE_ENERGY_CHANGE = 35;
 	private static final int MINE_COUNT = 3;
+	private static final int L_MINE_RANGE = 2;
 	private static final int MINIMUM_ENERGY_LEVEL = 20;
-	private static final String ENERGY_LEVEL_FAILURE = "Enery level below 20 units, " + 
+	private static final int MOVE_LIMIT = 100;
+	private static final String ENERGY_LEVEL_FAILURE = "Enery level below " + MINIMUM_ENERGY_LEVEL + " units, " + 
 													   "life support fails. Game over.";
-	private static final String MOVE_LIMIT_EXCEEDED = "Move limit of 100 exceeded. Game over.";
+	private static final String MOVE_LIMIT_EXCEEDED = "Move limit of " + MOVE_LIMIT + " exceeded. Game over.";
 	private static final String MINE_HIT = "K-mine hit! Energy level decreased by " +
-										   " 30% and returned to the starting position";
+										   MINE_ENERGY_CHANGE + "% and returned to the starting position";
+	private static final String L_MINE_ZAP = "You have been zapped by an L mine!";
     private static final String STAR_HIT = "You cannot land on stars! Please move again.";										  
 	private static final String WINNER_NOTICE = "You win!!!";
 
@@ -29,7 +33,9 @@ class BabyGame {
 	private BabyQ babyQ;
 	private DashBoard dashboard;
 	private java.util.ArrayList<Mine> mines;
+	private Mine mine;
 	private double moveCount;
+	private int distance;
 
 	// REQUIRES: BabyQ(bq) object is set
     // MODIFIES: /
@@ -68,14 +74,19 @@ class BabyGame {
     //				If the ship stays in the same position, the energy level is increased
     //				If the ship moves, k-mines are placed, checks if a mine was hit. Decrements the energy
    	//								   based on mine hits and distance moved
-
     //
     public void userMove(int row, int col) {
     	
     	// Don't allow user to move onto stars
-		if(row == gate.getGateCol()-1 || col == gate.getGateRow()-1) {
+		if
+		(
+			(row == gate.getGateRow()-1 && col == gate.getGateCol()-1) ||
+			(row == gate.getGateRow() && col == gate.getGateCol()-1) ||
+			(row == gate.getGateRow()-1 && col == gate.getGateCol())
+		) {
 			dashboard.setNotification(STAR_HIT);
 		} else {
+
 			// Reset Dashboard Notification
 	    	dashboard.setNotification("");
 	    	moveCount++;
@@ -87,7 +98,17 @@ class BabyGame {
 			} else {
 
 				for(int i = 0; i < MINE_COUNT; i++) {
-					mines.add(new Mine(grid, MINE_CHARACTER));
+					mine = new Mine(grid, K_MINE_CHARACTER);
+
+					// Create an L mine if the mine is created on a previous K mine
+					for(int j = 0; j < mines.size(); j++) {
+						if(mines.get(j).getRow() == mine.getRow() && mines.get(j).getCol() == mine.getCol()) {
+							mine.setSprite(L_MINE_CHARACTER);
+							mine.draw();
+						}
+					}
+
+					mines.add(mine);
 				}
 
 				// Set ships previous location before redrawing
@@ -96,20 +117,36 @@ class BabyGame {
 				// Erase current ship and redraw in the new location
 				ship.reDraw(row, col);
 
-				// Remove base 10% for moving
-				ship.decreaseEnergyLevelPercentage(ENERGY_CHANGE);
-
 				// Calculate energy used to move and decrement accordingly
-				ship.decreaseEnergyLevel(calculateEnergyUsed(ship.getPrevPosition(), ship.getPosition()));
+				ship.decreaseEnergyLevel(ship.calculateEnergyUsed(ship.getPrevPosition(), ship.getPosition()));
 
 				// Ship lands on mine
 				for(int i = 0; i < mines.size(); i++) {
+
+					// K Mine Hit
 					if(mines.get(i).getRow() == row && mines.get(i).getCol() == col) {
 						ship.decreaseEnergyLevel(MINE_ENERGY_CHANGE);
 						ship.reDraw(ship.getInitialRow(), ship.getInitialCol());
 						dashboard.setNotification(MINE_HIT);
 						break;
+					// Zapped by L Mine
+					// Make a function for this and get rid of diagonal zappage :)
+					}else if(((Math.abs(mines.get(i).getRow() - row) <= L_MINE_RANGE && (Math.abs(mines.get(i).getRow() - row) != 0)) 
+							|| ((Math.abs(mines.get(i).getCol() - col) <= L_MINE_RANGE) && (Math.abs(mines.get(i).getCol() - col) != 0))) 
+							&& mines.get(i).getSprite() == L_MINE_CHARACTER)
+					{	
+						if(Math.abs(mines.get(i).getRow() - row) <= L_MINE_RANGE && (Math.abs(mines.get(i).getRow() - row) != 0)) {
+							distance = Math.abs(mines.get(i).getRow() - row);
+						}else if(Math.abs(mines.get(i).getCol() - col) <= L_MINE_RANGE && (Math.abs(mines.get(i).getCol() - col) != 0)) {
+							distance = Math.abs(mines.get(i).getCol() - col);
+						}
+						ship.decreaseEnergyLevelPercentage(mine.calculateLMineDamage(distance));
+						mines.get(i).setSprite(K_MINE_CHARACTER);
+						mines.get(i).draw();
+						dashboard.setNotification(L_MINE_ZAP);
 					}
+
+
 				}
 
 				// Energy Level below minimum. Game over.
@@ -121,7 +158,7 @@ class BabyGame {
 			}
 
 			// Move count limit exceeded. Game over.
-			if(moveCount > 100) {
+			if(moveCount > MOVE_LIMIT) {
 				gameOver(MOVE_LIMIT_EXCEEDED);
 			}
 
@@ -130,6 +167,15 @@ class BabyGame {
 			dashboard.setMoveLabel(moveCount);		
 		}
     	
+    }
+
+    // REQUIRES: grid, babyQ, dashboard, and this are set
+    // MODIFIES: this, babyQ, grid, dashboard 
+    // EFFECTS:	Clears the grid, removes the dashboard, and reinitializes the game
+    public void resetGame() {
+    	grid.clearGrid();
+    	babyQ.remove(dashboard);
+    	this.initialize(grid);
     }
 
 	// REQUIRES: grid and dashboard are set
@@ -142,14 +188,6 @@ class BabyGame {
     	// Set dashboard notification
     	dashboard.setNotification(s);
 
-    }
-
-	// REQUIRES: p and n x,y coordinates are set
-    // MODIFIES: / 
-    // EFFECTS:	Uses the pythagorean theorem to calculate the distance from 2 points
-    //			c^2 = a^2 + b^2. It then multiplies the distance by 100 to get the energy used.
-    private double calculateEnergyUsed(java.awt.Point p, java.awt.Point n) {
-    	return Math.sqrt((Math.pow((n.x - p.x), 2) + Math.pow((n.y - p.y), 2))) * 100;
     }
 
 }
