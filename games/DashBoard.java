@@ -6,15 +6,18 @@ package games;
 //
 //
 
-class DashBoard extends javax.swing.JPanel {
+class DashBoard extends javax.swing.JPanel
+				implements java.awt.event.ActionListener
+{
 	
 	// Constants
-
+	private static final String RESTART_BUTTON_TEXT = "Restart Game";
 
 	// Instance Variables/Objects
 	private BabyGame babyGame;
 	private Ship ship;
 	private javax.swing.JLabel energyLevel, moves, notice;
+	private javax.swing.JButton reset;
 
 	// REQUIRES: Babygame and Ship objects are set
 	// MODIFIES: Sets the dashboard labels and initializes the Ship and BabyGame objects
@@ -27,11 +30,14 @@ class DashBoard extends javax.swing.JPanel {
 		energyLevel = new javax.swing.JLabel("");
 	    moves = new javax.swing.JLabel("");
 	    notice = new javax.swing.JLabel("");
+	    reset = new javax.swing.JButton(RESTART_BUTTON_TEXT);
+		reset.addActionListener(this);
 	    setEnergyLabel(ship.getEnergyLevel());
 	    setMoveLabel(babyGame.getMoveCount());
 	    add(energyLevel);
 	    add(moves);
 	    add(notice);
+	    add(reset);
 	}
 
 	// REQUIRES: /
@@ -53,6 +59,13 @@ class DashBoard extends javax.swing.JPanel {
 	// EFFECTS: Updates the notification text on the dashboard to display the provided string.
 	public void setNotification(String s) {
 		notice.setText(s);
+	}
+
+	// REQUIRES: babyGame is set
+	// MODIFIES: babyGame
+	// EFFECTS: Calls the babyGame reset method to reset the game
+	public void actionPerformed(java.awt.event.ActionEvent e) { 
+		babyGame.resetGame();
 	}
 
 }
