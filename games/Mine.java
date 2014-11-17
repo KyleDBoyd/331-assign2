@@ -11,6 +11,7 @@ class Mine extends Sprite {
 	// Constants
 	private static final int INITIAL_MINE_ROW = 1; // Placeholder
 	private static final int INITIAL_MINE_COL = 1; // Placeholder
+	private static final int L_MINE_DAMAGE = 20;
 
 	// REQUIRES: GameGrid object is set
 	// MODIFIES: See Sprite constructor for modifies
@@ -32,6 +33,12 @@ class Mine extends Sprite {
 		} while(randRow == grid.HEIGHT - 1 && randCol == grid.WIDTH - 1);
 		setPosition(randRow, randCol);
 		super.draw();
+	}
+	// REQUIRES: /
+	// MODIFIES: /
+	// EFFECTS: /
+	public double calculateLMineDamage(int distance) {
+		return L_MINE_DAMAGE / distance;
 	}
 
 	// REQUIRES: /

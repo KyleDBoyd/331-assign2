@@ -23,7 +23,7 @@ class BabyQ extends javax.swing.JFrame
 
         add(new GameGrid(this));
 
-	    setSize(800,800);
+	    setSize(1000,1000);
         setLocationRelativeTo(null);
     }
 
