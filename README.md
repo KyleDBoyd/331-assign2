@@ -40,6 +40,47 @@ Animation
 
 Upon winning the game, a celebratory animation should be shown to the player. Be creative.
 
+File List
+---------------------------
+* makefile
+* games/
+    * BabyGame.java
+    * DashBoard.java
+    * Location.java
+    * Ship.java
+    * StarGate.java
+    * BabyQ.java
+    * GameGrid.java
+    * Mine.java
+    * Sprite.java
+    * Animation.java
+
+Class Design
+---------------------------
+* BabyQ - Implements a top level window and initializes the game (Main)
+* GameGrid - Builds the game grid
+* Location - Implements a button that knows its location in a grid of buttons
+* BabyGame - Handles all of the game logic and click events
+* Animation - Handles the game animations
+* Sprite - Sprites that are drawn on the grid
+    * Mine
+    * Ship
+    * StarGate
+
+Example Execution
+---------------------------
+Run the following to compile the program:
+
+`$make`
+
+Once the program is compiled, run the following command to start the game:
+
+`$make run`
+
+Run the following to remove the compiled files:
+
+`$make clean`
+
 Assignment 2
 ===========================
 Specification
