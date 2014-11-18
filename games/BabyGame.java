@@ -34,6 +34,7 @@ class BabyGame {
 	private DashBoard dashboard;
 	private java.util.ArrayList<Mine> mines;
 	private Mine mine;
+	private Animation animation;
 	private double moveCount;
 	private int distance;
 
@@ -53,6 +54,7 @@ class BabyGame {
 		ship = new Ship(grid, SHIP_CHARACTER);
 		gate = new StarGate(grid, STAR_GATE_CHARACTER);
 		mines = new java.util.ArrayList<Mine>();
+		animation = new Animation(grid);
 		moveCount = 0;
 		dashboard = new DashBoard(this, ship);
 		babyQ.add(dashboard, java.awt.BorderLayout.SOUTH);
@@ -130,23 +132,24 @@ class BabyGame {
 						dashboard.setNotification(MINE_HIT);
 						break;
 					// Zapped by L Mine
-					// Make a function for this and get rid of diagonal zappage :)
-					}else if(((Math.abs(mines.get(i).getRow() - row) <= L_MINE_RANGE && (Math.abs(mines.get(i).getRow() - row) != 0)) 
-							|| ((Math.abs(mines.get(i).getCol() - col) <= L_MINE_RANGE) && (Math.abs(mines.get(i).getCol() - col) != 0))) 
-							&& mines.get(i).getSprite() == L_MINE_CHARACTER)
-					{	
-						if(Math.abs(mines.get(i).getRow() - row) <= L_MINE_RANGE && (Math.abs(mines.get(i).getRow() - row) != 0)) {
+					}else if(mines.get(i).getSprite() == L_MINE_CHARACTER){
+
+						if(Math.abs(mines.get(i).getRow() - row) <= L_MINE_RANGE && (Math.abs(mines.get(i).getRow() - row) != 0) && mines.get(i).getCol() == col) {
 							distance = Math.abs(mines.get(i).getRow() - row);
-						}else if(Math.abs(mines.get(i).getCol() - col) <= L_MINE_RANGE && (Math.abs(mines.get(i).getCol() - col) != 0)) {
+						}else if(Math.abs(mines.get(i).getCol() - col) <= L_MINE_RANGE && (Math.abs(mines.get(i).getCol() - col) != 0) && mines.get(i).getRow() == row) {
 							distance = Math.abs(mines.get(i).getCol() - col);
+						}else{
+							distance = 0;
 						}
-						ship.decreaseEnergyLevelPercentage(mine.calculateLMineDamage(distance));
-						mines.get(i).setSprite(K_MINE_CHARACTER);
-						mines.get(i).draw();
-						dashboard.setNotification(L_MINE_ZAP);
+
+						// Decrease the energy level if hit by an L mine and change the L mine to a K mine
+						if(distance != 0) {
+							ship.decreaseEnergyLevelPercentage(mine.calculateLMineDamage(distance));
+							mines.get(i).setSprite(K_MINE_CHARACTER);
+							mines.get(i).drawSprite();
+							dashboard.setNotification(L_MINE_ZAP);
+						}
 					}
-
-
 				}
 
 				// Energy Level below minimum. Game over.
@@ -154,6 +157,7 @@ class BabyGame {
 					gameOver(ENERGY_LEVEL_FAILURE);
 				}else if(gate.getGateRow() == ship.getRow() && gate.getGateCol() == ship.getCol()) {
 					gameOver(WINNER_NOTICE);
+					animation.startAnimation();
 				}
 			}
 
@@ -175,6 +179,7 @@ class BabyGame {
     public void resetGame() {
     	grid.clearGrid();
     	babyQ.remove(dashboard);
+    	animation.stopAnimation();
     	this.initialize(grid);
     }
 

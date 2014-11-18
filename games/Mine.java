@@ -41,6 +41,13 @@ class Mine extends Sprite {
 		return L_MINE_DAMAGE / distance;
 	}
 
+	// REQUIRES: Grid is set and current row/col are withing grid bounds.
+    // MODIFIES: grid text
+    // EFFECTS: Draws the sprite string in the current row/col of the grid
+    public void drawSprite() {
+        grid.grid[getRow()][getCol()].setText(sprite);
+    }
+
 	// REQUIRES: /
 	// MODIFIES: /
 	// EFFECTS: Returns a random number greater than or equal to the min 
