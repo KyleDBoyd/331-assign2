@@ -1,10 +1,10 @@
 package games;
 
 // OVERVIEW:
-//
-//
+// Handles the game animiations
 
 class Animation {
+
 	// Constants
 	private static final int ANIMATION_DELAY = 20;
 	private static final int ANIMATION_START_ROW = 1;
@@ -21,9 +21,9 @@ class Animation {
 	private java.awt.event.ActionListener animation;
 	private int row, col, animationDirection, gridHeight, gridWidth, startRow, startCol;
 
-	// REQUIRES: \
-	// MODIFIES: \
-	// EFFECTS: \
+	// REQUIRES: Game grid g is set
+	// MODIFIES: grid, timer, animation
+	// EFFECTS: Initialzes the animation variables and sets up the timer listener 
 	Animation(GameGrid g) {
 		grid = g;
 		initAnimation();
@@ -35,32 +35,32 @@ class Animation {
 		timer = new javax.swing.Timer(ANIMATION_DELAY, animation);
 	}
 
-	// REQUIRES: \
-	// MODIFIES: \
-	// EFFECTS: \
+	// REQUIRES: grid and timer are set
+	// MODIFIES: grid, timer
+	// EFFECTS: clears the grid and starts the timer which triggers the animation
 	public void startAnimation() {
 		grid.clearGrid();
 		timer.start();
 	}
 
-	// REQUIRES: \
-	// MODIFIES: \
-	// EFFECTS: \
+	// REQUIRES: timer is set
+	// MODIFIES: timer
+	// EFFECTS: stops the timer which stops the animation
 	public void stopAnimation() {
 		timer.stop();
 	}
 
-	// REQUIRES: \
-	// MODIFIES: \
-	// EFFECTS: \
+	// REQUIRES: grid, is set
+	// MODIFIES: grid, see modifies for initAnimation()
+	// EFFECTS: clears the grid and resets the variables for the animations
 	public void resetAnimation() {
 		grid.clearGrid();
 		initAnimation();
 	}
 
-	// REQUIRES: \
-	// MODIFIES: \
-	// EFFECTS: \
+	// REQUIRES: grid and class variables are correctly set 
+	// MODIFIES: grid, see modifies for initAnimation()
+	// EFFECTS: performs the grid animation. Basically a "cyclone" to the center of the grid
 	private void gridAnimation() {
 
 		if(grid.grid[row][col].getText() == ANIMATION_CHARACTER) {
@@ -108,9 +108,9 @@ class Animation {
 	}
 
 
-	// REQUIRES: \
-	// MODIFIES: \
-	// EFFECTS: \
+	// REQUIRES: grid is set 
+	// MODIFIES: row, col, animationDirection, gridHeight, gridWidth, startRow, startCol
+	// EFFECTS: initialzes all variables that is necessary for the animation
 	private void initAnimation() {
 		row = ANIMATION_START_ROW;
 		col = ANIMATION_START_COL;

@@ -36,7 +36,7 @@ class Mine extends Sprite {
 	}
 	// REQUIRES: /
 	// MODIFIES: /
-	// EFFECTS: /
+	// EFFECTS: calculates the L mine damage => damage/distance
 	public double calculateLMineDamage(int distance) {
 		return L_MINE_DAMAGE / distance;
 	}

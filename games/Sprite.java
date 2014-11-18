@@ -77,11 +77,14 @@ class Sprite {
 
     // REQUIRES: /
     // MODIFIES: / 
-    // EFFECTS: /
+    // EFFECTS: Sets the sprite class variable to the provided string
     public void setSprite(String s) {
         sprite = s;
     }
 
+    // REQUIRES: /
+    // MODIFIES: / 
+    // EFFECTS: returns the sprite
     public String getSprite() {
         return sprite;
     }
