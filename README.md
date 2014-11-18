@@ -30,8 +30,8 @@ It is acceptable to generate debugging output to System.out or System.err.
 #####Restart game
 
 It should be possible to restart the game either by clicking a button or hitting a menu item.
-L-mines
 
+#####L-Mines
 If a new K-mine lands on top of an existing K-mine it is converted to a L-mine. When an L-mine hits the E-ship directly, the L-mine acts exactly like a K-mine. L-mines can hit the E-ship using "ray guns" that only act in directions parallel to the X or Y axes (that is, not diagonally) and only have an effect up to two units of distance. Rather than blowing the E-ship back to the start, the L-mine depletes the E-ship's energy by 20/DL %, where DL is the distance between the L-mine and the E-ship. After zapping the E-ship, the L-mine reverts to a K-mine.
 Moves don't consume energy
 
