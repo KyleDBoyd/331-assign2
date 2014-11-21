@@ -99,19 +99,6 @@ class BabyGame {
 			// Ship attempted move
 			} else {
 
-				for(int i = 0; i < MINE_COUNT; i++) {
-					mine = new Mine(grid, K_MINE_CHARACTER);
-
-					// Create an L mine if the mine is created on a previous K mine
-					for(int j = 0; j < mines.size(); j++) {
-						if(mines.get(j).getRow() == mine.getRow() && mines.get(j).getCol() == mine.getCol()) {
-							mine.setSprite(L_MINE_CHARACTER);
-							mine.draw();
-						}
-					}
-
-					mines.add(mine);
-				}
 
 				// Set ships previous location before redrawing
 				ship.setPrevPosition(ship.getRow(), ship.getCol());
@@ -122,48 +109,62 @@ class BabyGame {
 				// Calculate energy used to move and decrement accordingly
 				ship.decreaseEnergyLevel(ship.calculateEnergyUsed(ship.getPrevPosition(), ship.getPosition()));
 
-				// Ship lands on mine
-				for(int i = 0; i < mines.size(); i++) {
+			}
 
-					// K Mine Hit
-					if(mines.get(i).getRow() == row && mines.get(i).getCol() == col) {
-						ship.decreaseEnergyLevel(MINE_ENERGY_CHANGE);
-						ship.reDraw(ship.getInitialRow(), ship.getInitialCol());
-						dashboard.setNotification(MINE_HIT);
-						break;
-					// Zapped by L Mine
-					}else if(mines.get(i).getSprite() == L_MINE_CHARACTER){
+			// Create mine
+			mine = new Mine(grid, K_MINE_CHARACTER);
 
-						if(Math.abs(mines.get(i).getRow() - row) <= L_MINE_RANGE && (Math.abs(mines.get(i).getRow() - row) != 0) && mines.get(i).getCol() == col) {
-							distance = Math.abs(mines.get(i).getRow() - row);
-						}else if(Math.abs(mines.get(i).getCol() - col) <= L_MINE_RANGE && (Math.abs(mines.get(i).getCol() - col) != 0) && mines.get(i).getRow() == row) {
-							distance = Math.abs(mines.get(i).getCol() - col);
-						}else{
-							distance = 0;
-						}
-
-						// Decrease the energy level if hit by an L mine and change the L mine to a K mine
-						if(distance != 0) {
-							ship.decreaseEnergyLevelPercentage(mine.calculateLMineDamage(distance));
-							mines.get(i).setSprite(K_MINE_CHARACTER);
-							mines.get(i).drawSprite();
-							dashboard.setNotification(L_MINE_ZAP);
-						}
-					}
-				}
-
-				// Energy Level below minimum. Game over.
-				if(ship.getEnergyLevel() < MINIMUM_ENERGY_LEVEL) {
-					gameOver(ENERGY_LEVEL_FAILURE);
-				}else if(gate.getGateRow() == ship.getRow() && gate.getGateCol() == ship.getCol()) {
-					gameOver(WINNER_NOTICE);
-					animation.startAnimation();
+			// Create an L mine if the mine is created on a previous K mine
+			for(int j = 0; j < mines.size(); j++) {
+				if(mines.get(j).getRow() == mine.getRow() && mines.get(j).getCol() == mine.getCol()) {
+					mine.setSprite(L_MINE_CHARACTER);
+					mine.draw();
 				}
 			}
 
+			mines.add(mine);
+
+			// Ship lands on mine
+			for(int i = 0; i < mines.size(); i++) {
+
+				// K Mine Hit
+				if(mines.get(i).getRow() == row && mines.get(i).getCol() == col) {
+					ship.decreaseEnergyLevel(MINE_ENERGY_CHANGE);
+					ship.reDraw(ship.getInitialRow(), ship.getInitialCol());
+					dashboard.setNotification(MINE_HIT);
+					break;
+				// Zapped by L Mine
+				}else if(mines.get(i).getSprite() == L_MINE_CHARACTER){
+
+					if(Math.abs(mines.get(i).getRow() - row) <= L_MINE_RANGE && (Math.abs(mines.get(i).getRow() - row) != 0) && mines.get(i).getCol() == col) {
+						distance = Math.abs(mines.get(i).getRow() - row);
+					}else if(Math.abs(mines.get(i).getCol() - col) <= L_MINE_RANGE && (Math.abs(mines.get(i).getCol() - col) != 0) && mines.get(i).getRow() == row) {
+						distance = Math.abs(mines.get(i).getCol() - col);
+					}else{
+						distance = 0;
+					}
+
+					// Decrease the energy level if hit by an L mine and change the L mine to a K mine
+					if(distance != 0) {
+						ship.decreaseEnergyLevelPercentage(mine.calculateLMineDamage(distance));
+						mines.get(i).setSprite(K_MINE_CHARACTER);
+						mines.get(i).drawSprite();
+						dashboard.setNotification(L_MINE_ZAP);
+					}
+				}
+			}
+
+			
 			// Move count limit exceeded. Game over.
 			if(moveCount > MOVE_LIMIT) {
 				gameOver(MOVE_LIMIT_EXCEEDED);
+			// Energy Level below minimum. Game over.
+			}else if(ship.getEnergyLevel() < MINIMUM_ENERGY_LEVEL) {
+				gameOver(ENERGY_LEVEL_FAILURE);
+			// Winner
+			}else if(gate.getGateRow() == ship.getRow() && gate.getGateCol() == ship.getCol()) {
+				gameOver(WINNER_NOTICE);
+				animation.startAnimation();
 			}
 
 			// Update dashboard
