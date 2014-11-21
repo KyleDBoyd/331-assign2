@@ -16,3 +16,6 @@ This is a list of changes made from assignment 2 to assigment 3
 * Setup a "cyclone" animation
 * Made this animation run when the user wins the game
 * Adjusted game to generate a mine when the user stays in the current location
+
+My game had a decent design, so it was fairly simple to adjust the constants
+and extend the game to incorporate the new features.
