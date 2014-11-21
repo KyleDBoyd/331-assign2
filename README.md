@@ -91,6 +91,14 @@ Move and have insufficient energy => Game over.
 
 Stay in place => Energy increased by 9%. 
 
+Move onto a K-mine => Lose 35% health and sent to start. Potential game over.
+
+K-mine spawns on ship => Lose 35% health and sent to start. Potential game over.
+
+Move onto a L-mine => Lose 35% health and sent to start. Potential game over.
+
+Move within 2 spaces (horizontally/vertically) of L-mine => Zapped by L-mine => L-mine switches to K-mine => Potential game over.
+
 Exceed move limit => Game over.
 
 Reach end with sufficient energy => Win!
@@ -98,6 +106,10 @@ Reach end with sufficient energy => Win!
 Reach end with insufficient energy => Game over.
 
 Reach end, but exceed move limit => Game over.
+
+Game over => Restart game => Correctly restarts.
+
+Win Game => Winning Animation => Restart game => Game over
 
 
 Assignment 2
