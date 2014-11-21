@@ -83,7 +83,7 @@ Run the following to remove the compiled files:
 
 Test Cases
 ---------------------------
-Move around the grid => Energy descrease and K-mines spawn
+Move around the grid => Energy descrease and K-mines spawn. L-mines are created if multiple k-mines on one square.
 
 Move on the first move (Insufficient Energy) => Game over.
 
