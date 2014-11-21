@@ -15,3 +15,4 @@ This is a list of changes made from assignment 2 to assigment 3
 * Modified the dashboard notices to incorporate the numerical constants instead of having hard coded values
 * Setup a "cyclone" animation
 * Made this animation run when the user wins the game
+* Adjusted game to generate a mine when the user stays in the current location
